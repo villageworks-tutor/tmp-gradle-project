@@ -1,0 +1,49 @@
+plugins {
+	id 'application'
+	id 'java'
+	id 'eclipse-wtp' 
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	
+	// Tomcat & Servlet API
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0' 			 // Tomcat 10 用のServlet API
+    implementation 'org.apache.tomcat.embed:tomcat-embed-core:10.1.18'	 // Tomcat 10の埋め込みコア
+    implementation 'org.apache.tomcat.embed:tomcat-embed-jasper:10.1.18' // JSPを使う場合
+
+	implementation 'jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:2.0.0'
+	implementation 'org.glassfish.web:jakarta.servlet.jsp.jstl:2.0.0' 
+
+	// JUnit
+	testImplementation platform('org.junit:junit-bom:5.11.4')			 // JUnit5 Bill of Materials
+	testImplementation 'org.junit.jupiter:junit-jupiter-api'			 // JUnit jupiter
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine' 		 // JUnit Jupiter Engine
+	testRuntimeOnly    'org.junit.platform:junit-platform-launcher'		 // JUnit platform launcher
+    testImplementation 'org.hamcrest:hamcrest:3.0'						 // Hamcrest
+	testImplementation 'org.junit.jupiter:junit-jupiter-params'  		 // @ParameterizedTest に必要    	
+	
+	// Selenium & Selenide
+    testImplementation 'org.seleniumhq.selenium:selenium-java:4.29.0' 	 // Selenium
+    testImplementation 'com.codeborne:selenide:7.7.2' 					 // Selenide
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.7.0' 	 // WebDriverの管理自動化
+    
+}
+
+application {
+	mainClass = 'com.example.MyApp'
+}
+
+tasks.register('hello') {
+	doLast {
+		println 'Hello Gradle!'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
+
